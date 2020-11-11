@@ -31,7 +31,6 @@
     // var historySearchCtner
     // var subCard
 
-    var
 
 // Create API request
     // var url
