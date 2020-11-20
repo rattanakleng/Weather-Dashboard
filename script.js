@@ -14,7 +14,7 @@ var lat;
 var lon;
 var cityName = "";
 var allCityName = JSON.parse(localStorage.getItem("cityNameWDash")) || [];
-var forcastCardCtner = $(".forcast-card");
+var forecastCardCtner = $(".forecast-card");
 var lastSearchCity;
 var buttonCtner = $("#button-container");
 
@@ -33,7 +33,7 @@ searchBtn.click(function () {
     }
 
     // Clear all information in card
-    forcastCardCtner.empty();
+    forecastCardCtner.empty();
 
     currentWeatherRequest();
 
@@ -82,7 +82,7 @@ function currentWeatherRequest() {
 
         requestUVI()
 
-        requestForcast();
+        requestforecast();
 
         allCityName.push(cityName);
 
@@ -133,60 +133,60 @@ function requestUVI() {
     });
 }
 
-// Api request 5 days forcast and display info in cards
+// Api request 5 days forecast and display info in cards
 
-function requestForcast() {
+function requestforecast() {
 
-    var queryURLForcast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + apiKey;
+    var queryURLforecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + apiKey;
 
     $.ajax({
 
-        url: queryURLForcast,
+        url: queryURLforecast,
         method: "GET"
 
-    }).then(function (responseForcast) {
+    }).then(function (responseforecast) {
 
-        displayForcast()
+        displayforecast()
 
-        // Display 5 days forcast
-        function displayForcast() {
+        // Display 5 days forecast
+        function displayforecast() {
 
             for (var i = 0; i < 33; i = i + 8) {
                 // Get date(s)
-                var forcastDate = (moment(responseForcast.list[i].dt_txt).format('L'));
+                var forecastDate = (moment(responseforecast.list[i].dt_txt).format('L'));
 
                 // Get temp
-                var forcastTemp = responseForcast.list[i].main.temp
+                var forecastTemp = responseforecast.list[i].main.temp
 
                 // Get humidity
-                var forcastHumid = responseForcast.list[i].main.humidity;
-                // console.log(forcastHumid);
+                var forecastHumid = responseforecast.list[i].main.humidity;
+                // console.log(forecastHumid);
 
                 // // Get windspeed
-                var forcastWind = Math.floor(responseForcast.list[i].wind.speed / 0.681818);
-                // console.log(forcastWind);
+                var forecastWind = Math.floor(responseforecast.list[i].wind.speed / 0.681818);
+                // console.log(forecastWind);
 
                 // Get weather icon
-                var focastIconCode = responseForcast.list[i].weather[0].icon;
+                var forecastIconCode = responseforecast.list[i].weather[0].icon;
                 // console.log(focastIconCode);
 
-                var forcastIconUrl = "https://openweathermap.org/img/wn/" + focastIconCode + ".png"
-                // var forcarstIconEl = "<img src='" + forcastIconUrl + "'>";
+                var forecastIconUrl = "https://openweathermap.org/img/wn/" + forecastIconCode + ".png"
+                // var forcarstIconEl = "<img src='" + forecastIconUrl + "'>";
 
                 // Push all information to cards
-                $(".forcast-card").each(function () {
+                $(".forecast-card").each(function () {
 
                     if ($(this).data("number") === i) {
 
-                        $(this).append($("<h3 class='is-size-4'></h3>").text(forcastDate));
+                        $(this).append($("<h3 class='is-size-4'></h3>").text(forecastDate));
 
-                        $("<img />").attr("src", forcastIconUrl).appendTo($(this));
+                        $("<img />").attr("src", forecastIconUrl).appendTo($(this));
 
-                        $(this).append($("<h3 class='is-size-5'></h3>").text(`Temperature: ${forcastTemp} F`));
+                        $(this).append($("<h3 class='is-size-5'></h3>").text(`Temperature: ${forecastTemp} °F`));
 
-                        $(this).append($("<h3 class='is-size-5'></h3>").text(`Humidity: ${forcastHumid} %`));
+                        $(this).append($("<h3 class='is-size-5'></h3>").text(`Humidity: ${forecastHumid} %`));
 
-                        $(this).append($("<h3 class='is-size-5'></h3>").text(`Wind Speed: ${forcastWind} MPH`));
+                        $(this).append($("<h3 class='is-size-5'></h3>").text(`Wind Speed: ${forecastWind} MPH`));
                     }
                 });
             };
@@ -252,7 +252,7 @@ buttonCtner.on("click", ".new-btn", function () {
     var pastCityName = $(this).attr("data-name");
     console.log(pastCityName);
 
-    forcastCardCtner.empty();
+    forecastCardCtner.empty();
 
     cityName = pastCityName;
 
