@@ -4,6 +4,10 @@ The app is used to show the weather outlook for multiple cities. User can use it
 
 This app is develope with Server-Side APIs: Weather Dashboard (OpenWeather API, https://openweathermap.org/api).
 
+## Live page for the app
+
+https://rattanakleng.github.io/Weather-Dashboard/
+
 ## Application Feature
 
 - Work in the browser and feature dynamically updated HTML and CSS and responsive.
@@ -14,11 +18,14 @@ This app is develope with Server-Side APIs: Weather Dashboard (OpenWeather API, 
 - When page load it display the current and forecast weather condtion of the last searched city.
 
 ## Programming Language
+
 HTML, CSS, JavaScript, jQuery, Bulma CSS framework.
 
 ## Desktop Layout
+
 ![Desktop Layout](./img/desktop-layout.JPG)
 
 ## Mobile Layout
+
 ![Desktop Layout](./img/mobile-layout.png)
 

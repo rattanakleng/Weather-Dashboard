@@ -64,7 +64,7 @@ function currentWeatherRequest() {
         //display weather icon in html
         var weatherIconEl = $("#weather-icon");
         var iconCode = currentWeather.weather[0].icon;
-        var iconUrl = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png"
+        var iconUrl = "https://openweathermap.org/img/wn/" + iconCode + "@2x.png"
         weatherIconEl.attr("src", iconUrl);
 
         //display current temperature in html
@@ -100,7 +100,7 @@ function currentWeatherRequest() {
 
 // api request UV index
 function requestUVI() {
-    var queryURLUVI = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
+    var queryURLUVI = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
 
     $.ajax({
         url: queryURLUVI,
@@ -170,7 +170,7 @@ function requestForcast() {
                 var focastIconCode = responseForcast.list[i].weather[0].icon;
                 // console.log(focastIconCode);
 
-                var forcastIconUrl = "http://openweathermap.org/img/wn/" + focastIconCode + ".png"
+                var forcastIconUrl = "https://openweathermap.org/img/wn/" + focastIconCode + ".png"
                 // var forcarstIconEl = "<img src='" + forcastIconUrl + "'>";
 
                 // Push all information to cards
