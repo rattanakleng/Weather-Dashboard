@@ -13,21 +13,42 @@ var lat;
 //var latitute
 var lon;
 var cityName = "";
-var allCityName = [];
+// var allCityName = [];
+var allCityName = JSON.parse(localStorage.getItem("cityNameWDash")) || [];
+
 var forcastCardCtner = $(".forcast-card");
 var lastSearchCity;
+
 var buttonCtner = $("#button-container");
-
-
 
 
 pageStartDisplay()
 
-localStorage.getItem("cityNameWDash");
+searchBtn.click(function () {
 
-for (var i = allCityName.length - 1; i >= 0; i--) {
-    console.log(allCityName[i]);
-}
+    cityName = toTitleCase(inputEl.val());
+
+    if (!(isNaN(cityName))) {
+
+        inputEl.empty();
+        alert("City not found! Please try again!");
+        return;
+    }
+
+    // Clear all information in card
+    forcastCardCtner.empty();
+
+    currentWeatherRequest();
+
+    inputEl.val("");
+
+});
+
+// localStorage.getItem("cityNameWDash");
+
+// for (var i = allCityName.length - 1; i >= 0; i--) {
+//     console.log(allCityName[i]);
+// }
 
 // apiRequestCurrent weather
 function currentWeatherRequest() {
@@ -37,12 +58,18 @@ function currentWeatherRequest() {
     $.ajax({
 
         url: queryURL,
-        method: "GET"
+        method: "GET",
+        error: function () {
+            inputEl.empty();
+            alert("City not found! Please try again!");
+            return;
+        }
 
     }).then(function (currentWeather) {
 
         // console.log(currentWeather);
-
+        // Get cityName from input
+        $("#city-name").text(cityName);
         //display weather icon in html
         var weatherIconEl = $("#weather-icon");
         var iconCode = currentWeather.weather[0].icon;
@@ -63,6 +90,20 @@ function currentWeatherRequest() {
         lon = currentWeather.coord.lon
 
         requestUVI()
+
+        requestForcast();
+
+        allCityName.push(cityName);
+
+        compareCityName();
+
+        spliceAllCityName();
+
+        searchedCityList();
+
+        lastSearchCity = allCityName.slice(-1);
+
+        localStorage.setItem("lastSearchCity-WD", lastSearchCity);
     });
 }
 
@@ -100,7 +141,6 @@ function requestUVI() {
         }
     });
 }
-
 
 // Api request 5 days forcast and display info in cards
 
@@ -167,60 +207,59 @@ function requestForcast() {
 $("#input-el").keyup(function (event) {
 
     if (event.which === 13) {
+
         event.preventDefault();
+
         searchBtn.click();
     }
 });
 
 // Add eventListener to searchBtn to run all function
 
-searchBtn.click(function () {
+// Function compare input value to city list, update city list, and store in local storage
 
-    cityName = inputEl.val();
-    // If input is empty exit function
-    if (cityName == "") {
-        return;
+function compareCityName() {
+    // allCityName.sort();
+    allCityName.forEach(function (value, index, arr) {
+        var first_index = arr.indexOf(value);
+        var last_index = arr.lastIndexOf(value);
+
+        if (first_index !== last_index) {
+            allCityName.pop();
+
+        }
+    })
+}
+
+// Function limit number of city list / button
+
+function spliceAllCityName() {
+
+    if (allCityName.length > 3) {
+
+        allCityName.splice(allCityName[0], 1);
+        console.log(allCityName);
+    }
+}
+
+function searchedCityList() {
+
+    buttonCtner.empty();
+
+    for (var i = 0; i < allCityName.length; i++) {
+
+        buttonCtner.prepend(`<button class="new-btn button is-fullwidth my-0 is-align-left" data-name = "${allCityName[i]}"> ${allCityName[i]} </button>`);
+
     }
 
-    lastSearchCity = inputEl.val();
-
-    localStorage.setItem("lastSearchCity-WD", lastSearchCity)
-
-    // Clear all information in card
-    forcastCardCtner.empty();
-
-    // Get cityName from input
-    $("#city-name").text(cityName);
-
-    allCityName.push(cityName);
-
-
-    // get the current time and date
-    // Save cityName to local storage
-
-    localStorage.setItem("cityNameWDash", allCityName);
-
-    addHisBtn()
-
-    inputEl.val("");
-
-    currentWeatherRequest();
-    requestForcast();
-
-});
-
-
-
-
-function addHisBtn() {
-
-    buttonCtner.prepend(`<button class="new-btn button is-fullwidth my-0 is-align-left" data-name="${cityName}"> ${cityName} </button>`);
+    localStorage.setItem("cityNameWDash", JSON.stringify(allCityName));
 };
 
 // Display information when previouse city click
 buttonCtner.on("click", ".new-btn", function () {
 
-    var pastCityName = $(this).data("name");
+    var pastCityName = $(this).attr("data-name");
+    console.log(pastCityName);
 
     forcastCardCtner.empty();
 
@@ -229,13 +268,13 @@ buttonCtner.on("click", ".new-btn", function () {
     $("#city-name").text(cityName);
 
     currentWeatherRequest();
-    requestForcast();
+    // requestForcast();
 });
-
-
 
 // Display last search city when page load
 function pageStartDisplay() {
+
+    //spliceAllCityName()
 
     // Get current hour and date
     $("#current-date").text(moment().format('L'));
@@ -246,21 +285,30 @@ function pageStartDisplay() {
 
     currentWeatherRequest();
 
-    requestForcast();
-
     displayPreSeachCity();
-
 }
 
 // Display search history button
 function displayPreSeachCity() {
-    storedCity = [];
-    var prevStoreCity = localStorage.getItem("cityNameWDash")
-    var storedCity = prevStoreCity.split(",");
 
-    for (var i = 0; i < storedCity.length; i++) {
+    for (var i = 0; i < allCityName.length; i++) {
 
-        buttonCtner.prepend(`<button class="new-btn button is-fullwidth my-0 is-align-left" data-name = ${storedCity[i]}> ${storedCity[i]} </button>`);
-
+        buttonCtner.prepend(`<button class="new-btn button is-fullwidth my-0 is-align-left" data-name = "${allCityName[i]}"> ${allCityName[i]} </button>`);
     }
+}
+
+{/* <form>
+    Input:
+  <br /><textarea name="input" onchange="form.output.value=toTitleCase(this.value)" onkeyup="form.output.value=toTitleCase(this.value)"></textarea>
+    <br />Output:
+  <br /><textarea name="output" readonly onclick="select(this)"></textarea>
+</form> */}
+
+function toTitleCase(str) {
+    return str.replace(
+        /\w\S*/g,
+        function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    );
 }
