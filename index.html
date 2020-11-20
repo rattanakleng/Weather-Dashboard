@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <!-- <link rel="stylesheet" href="./css/style.css"> -->
+    <link rel="stylesheet" href="./CSS/style.css">
     <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
-
+    <!-- header -->
     <section class="hero is-dark">
         <div class="hero-body py-3">
             <div class="container">
@@ -23,6 +23,7 @@
         </div>
     </section>
 
+    <!-- search input and button  -->
     <section class="section ">
         <div class="columns">
             <div class="column is-one-quarter has-background-light">
@@ -34,40 +35,47 @@
                 </div>
 
                 <div class="container" id="button-container">
-                                       
+
                 </div>
             </div>
-
+            <!-- current weather card container -->
             <div class="column p-0 ml-5">
                 <div class="card">
                     <div class="card-content">
+
                         <p class="title is-size-3 mb-6">
                             <span id="city-name"></span>
                             (<span id="current-date"></span>)
-                            <!-- <span id="uv-index-icon"> <img src='http://openweathermap.org/img/wn/04n@2x.png'> </span> -->
-
                             <img id="weather-icon">
-
                         </p>
+
                         <p class="subtitle">Temperature: <span id="current-temp"></span> &deg;F</p>
+
                         <p class="subtitle">Humidity: <span id="current-humidity"></span> %</p>
+
                         <p class="subtitle">Wind Speed: <span id="current-wind-speed"></span> MPH</p>
-                        <p class="subtitle">UV Index: <span class="p-1" id="current-uv-index"></span> </p>
+
+                        <p class="subtitle">UV Index: <span class="is-radius p-1 has-text-light"
+                                id="current-uv-index"></span> </p>
+
                     </div>
                 </div>
 
                 <!-- forcast card container -->
                 <div class="container m-0">
+
                     <h2 class="title is-size-3 mt-5"> 5-Day Forecast:</h2>
+
                     <div class="section p-0">
                         <div class="columns">
-
                             <div class="column f-card-ctner ">
-                                <div class="forcast-card card has-background-info card-content is-flex-direction-column" data-number="0">
+                                <div class="forcast-card card has-background-info card-content is-flex-direction-column"
+                                    data-number="0">
                                 </div>
                             </div>
                             <div class="column ">
-                                <div class="forcast-card card has-background-info card-content is-flex-direction-column" data-number="8">
+                                <div class="forcast-card card has-background-info card-content is-flex-direction-column"
+                                    data-number="8">
                                 </div>
                             </div>
 
@@ -83,7 +91,7 @@
                             </div>
 
                             <div class="column ">
-                                <div class="forcast-card card has-background-info card-content" data-number ="32">
+                                <div class="forcast-card card has-background-info card-content" data-number="32">
                                 </div>
                             </div>
                         </div>

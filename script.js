@@ -13,12 +13,9 @@ var lat;
 //var latitute
 var lon;
 var cityName = "";
-// var allCityName = [];
 var allCityName = JSON.parse(localStorage.getItem("cityNameWDash")) || [];
-
 var forcastCardCtner = $(".forcast-card");
 var lastSearchCity;
-
 var buttonCtner = $("#button-container");
 
 
@@ -43,12 +40,6 @@ searchBtn.click(function () {
     inputEl.val("");
 
 });
-
-// localStorage.getItem("cityNameWDash");
-
-// for (var i = allCityName.length - 1; i >= 0; i--) {
-//     console.log(allCityName[i]);
-// }
 
 // apiRequestCurrent weather
 function currentWeatherRequest() {
@@ -203,8 +194,9 @@ function requestForcast() {
     });
 };
 
+
 // Submit search when click enter
-$("#input-el").keyup(function (event) {
+inputEl.keyup(function (event) {
 
     if (event.which === 13) {
 
@@ -214,7 +206,6 @@ $("#input-el").keyup(function (event) {
     }
 });
 
-// Add eventListener to searchBtn to run all function
 
 // Function compare input value to city list, update city list, and store in local storage
 
@@ -231,11 +222,11 @@ function compareCityName() {
     })
 }
 
-// Function limit number of city list / button
+// Function limit number of search history button
 
 function spliceAllCityName() {
 
-    if (allCityName.length > 3) {
+    if (allCityName.length > 5) {
 
         allCityName.splice(allCityName[0], 1);
         console.log(allCityName);
@@ -268,13 +259,10 @@ buttonCtner.on("click", ".new-btn", function () {
     $("#city-name").text(cityName);
 
     currentWeatherRequest();
-    // requestForcast();
 });
 
-// Display last search city when page load
+// Function display last search city on pageload
 function pageStartDisplay() {
-
-    //spliceAllCityName()
 
     // Get current hour and date
     $("#current-date").text(moment().format('L'));
@@ -288,7 +276,7 @@ function pageStartDisplay() {
     displayPreSeachCity();
 }
 
-// Display search history button
+// Function display search history button
 function displayPreSeachCity() {
 
     for (var i = 0; i < allCityName.length; i++) {
@@ -297,12 +285,8 @@ function displayPreSeachCity() {
     }
 }
 
-{/* <form>
-    Input:
-  <br /><textarea name="input" onchange="form.output.value=toTitleCase(this.value)" onkeyup="form.output.value=toTitleCase(this.value)"></textarea>
-    <br />Output:
-  <br /><textarea name="output" readonly onclick="select(this)"></textarea>
-</form> */}
+
+//Function convert first letter to upper case
 
 function toTitleCase(str) {
     return str.replace(
