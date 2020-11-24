@@ -18,6 +18,10 @@ var forecastCardCtner = $(".forecast-card");
 var lastSearchCity;
 var buttonCtner = $("#button-container");
 
+var number = "0123456789";
+var specialChar = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+console.log(specialChar);
+console.log(number);
 
 pageStartDisplay()
 
@@ -27,9 +31,8 @@ searchBtn.click(function () {
 
     if (!(isNaN(cityName))) {
 
-        inputEl.empty();
-        alert("City not found! Please try again!");
-        return;
+        if (!alert("City not found! Please try again!")) { window.location.reload(); }
+
     }
 
     // Clear all information in card
@@ -160,15 +163,13 @@ function requestforecast() {
 
                 // Get humidity
                 var forecastHumid = responseforecast.list[i].main.humidity;
-                // console.log(forecastHumid);
 
                 // // Get windspeed
                 var forecastWind = Math.floor(responseforecast.list[i].wind.speed / 0.681818);
-                // console.log(forecastWind);
 
                 // Get weather icon
                 var forecastIconCode = responseforecast.list[i].weather[0].icon;
-                // console.log(focastIconCode);
+
 
                 var forecastIconUrl = "https://openweathermap.org/img/wn/" + forecastIconCode + ".png"
                 // var forcarstIconEl = "<img src='" + forecastIconUrl + "'>";
@@ -210,6 +211,7 @@ inputEl.keyup(function (event) {
 // Function compare input value to city list, update city list, and store in local storage
 
 function compareCityName() {
+
     // allCityName.sort();
     allCityName.forEach(function (value, index, arr) {
         var first_index = arr.indexOf(value);
@@ -217,7 +219,6 @@ function compareCityName() {
 
         if (first_index !== last_index) {
             allCityName.pop();
-
         }
     })
 }
@@ -285,13 +286,15 @@ function displayPreSeachCity() {
     }
 }
 
-
 //Function convert first letter to upper case
 
 function toTitleCase(str) {
+    console.log("str parameter from totitle case funct: " + str)
+
     return str.replace(
         /\w\S*/g,
         function (txt) {
+
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         }
     );
