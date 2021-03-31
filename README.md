@@ -7,6 +7,16 @@
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" />
 </p>
 
+<p align="center">
+    <img src="https://img.shields.io/badge/Javascript-red" />
+    <img src="https://img.shields.io/badge/jQuery-orange"  />
+    <img src="https://img.shields.io/badge/-node.js-yellow" />
+    <img src="https://img.shields.io/badge/-inquirer-blue" >
+    <img src="https://img.shields.io/badge/-Bulma-indigo" />
+    <img src="https://img.shields.io/badge/-OpenWeatherAPI-indigo" />
+    
+</p>
+
 The app is used to show the weather outlook for multiple cities. User can use it to check current and future weather conditions, temperature, humidity, wind speed, and the UV index for cities.
 
 This app is develope with Server-Side APIs: Weather Dashboard (OpenWeather API, https://openweathermap.org/api).
