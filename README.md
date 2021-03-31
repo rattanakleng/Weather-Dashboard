@@ -1,5 +1,12 @@
 # Weather-Dashboard
 
+<p align="center">
+    <img src="https://img.shields.io/github/repo-size/rattanakleng/Weather-Dashboard" />
+    <img src="https://img.shields.io/github/issues/rattanakleng/Weather-Dashboard" />
+    <img src="https://img.shields.io/github/last-commit/rattanakleng/Weather-Dashboard" />
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+</p>
+
 The app is used to show the weather outlook for multiple cities. User can use it to check current and future weather conditions, temperature, humidity, wind speed, and the UV index for cities.
 
 This app is develope with Server-Side APIs: Weather Dashboard (OpenWeather API, https://openweathermap.org/api).
