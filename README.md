@@ -13,7 +13,7 @@
     <img src="https://img.shields.io/badge/-node.js-yellow" />
     <img src="https://img.shields.io/badge/-inquirer-blue" >
     <img src="https://img.shields.io/badge/-Bulma-indigo" />
-    <img src="https://img.shields.io/badge/-OpenWeatherAPI-indigo" />
+    <img src="https://img.shields.io/badge/-OpenWeatherAPI-green" />
     
 </p>
 
