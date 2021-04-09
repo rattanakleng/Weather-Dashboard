@@ -17,7 +17,7 @@
     
 </p>
 
-The app allows users to check current and future weather conditions, temperature, humidity, wind speed, and the UV index for cities. This app developed with Server-Side OpenWeather API, https://openweathermap.org/api.
+The app allows users to check current and future weather conditions, temperature, humidity, wind speed, and the UV index for cities. This app was developed with Server-Side OpenWeather API, https://openweathermap.org/api.
 
 ## Live page for the app
 
